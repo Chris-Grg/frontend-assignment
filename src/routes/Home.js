@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavbarComponent";
 import ProductList from "../components/ProductList";
 
-const Home = ({ searchValue, setSearchValue, products }) => {
+const Home = ({ products }) => {
   return (
     <div>
-      <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <Navbar />
       <ProductList products={products} />
     </div>
   );

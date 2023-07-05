@@ -1,48 +1,35 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import ProductDetails from "./routes/ProductDetails";
+import SearchPage from "./routes/SearchPage";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
+import CartPage from "./routes/CartPage";
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
 
-  const getProducts = async () => {
-    const url = `https://fakestoreapi.com/products`;
-    const response = await fetch(url);
-    const responseJson = await response.json();
-    console.log(responseJson);
-    setProducts(responseJson);
-  };
   useEffect(() => {
-    getProducts();
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error(error));
   }, []);
-  // const getSearchedProduct =async (searchValue)=>{
-  //   const url = `https://fakestoreapi.com/products`;
-  //   const response = await fetch(url);
-  //   const responseJson = await response.json();
-  //   console.log(responseJson);
-  //   if(responseJson)
-  //   setProducts(responseJson);
-  // }
+
   return (
     <>
       <Routes>
+        <Route path="/" element={<Home products={products} />} />
         <Route
-          path="/"
-          element={
-            <Home
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              products={products}
-            />
-          }
-        />
-        <Route
-          path="/product-details"
+          path="/product-details/:productId"
           element={<ProductDetails products={products} />}
         />
+        <Route
+          path="/search-results"
+          element={<SearchPage products={products} />}
+        />
+        <Route path="/cart" element={<CartPage products={products} />} />
       </Routes>
     </>
   );

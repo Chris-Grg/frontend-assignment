@@ -2,18 +2,20 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-function NavScrollExample() {
-  const [searchTerm, setSearchTerm] = useState("");
+const NavbarComponent = () => {
+  const [newSearch, setNewSearch] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("searching: ", searchTerm);
+    window.location.href = `/search-results?query=${encodeURIComponent(
+      newSearch
+    )}`;
+    // console.log("searching: ", newSearch);
   };
   const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    console.log(searchTerm);
+    setNewSearch(event.target.value);
+    // console.log(newSearch);
   };
   return (
     <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
@@ -44,6 +46,6 @@ function NavScrollExample() {
       </Container>
     </Navbar>
   );
-}
+};
 
-export default NavScrollExample;
+export default NavbarComponent;

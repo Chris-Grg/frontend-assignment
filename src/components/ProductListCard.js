@@ -1,9 +1,13 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+
 const ProductListCard = ({ product }) => {
+  const handleProductClick = () => {
+    console.log(product.id);
+    window.location.href = `/product-details/${product.id}`;
+  };
   return (
-    <Card>
+    <Card onClick={handleProductClick}>
       <Card.Img
         variant="top"
         src={product.image}
