@@ -1,5 +1,5 @@
 # Tech used:
-react-router, react-bootstrap/bootstrap
+react-router, react-bootstrap/bootstrap, bootstrap-icons
 
 # How to run locally
 ## install dependencies
