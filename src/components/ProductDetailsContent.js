@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import Image from "react-bootstrap/Image";
-
-const ProductDetailsContent = () => {
-  const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-
-  useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${productId}`)
-      .then((response) => response.json())
-      .then((data) => setProduct(data))
-      .catch((error) => console.error(error));
-  }, [productId]);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
-
+const ProductDetailsContent = ({ product }) => {
   return (
-    <div className="container mt-4 d-flex flex-column align-items-center">
+    <div
+      className="container mt-4 d-flex flex-column align-items-center"
+      style={{ maxWidth: "75%" }}
+    >
       <Image
         src={product.image}
         alt={product.title}
@@ -27,26 +14,47 @@ const ProductDetailsContent = () => {
       />
       <div className="mt-4 text-center">
         <h2>{product.title}</h2>
-        <p
+        <div
+          className="description"
           style={{
-            textAlign: "justify",
-            maxWidth: "600px",
-            margin: "0 auto",
+            width: "100%",
+            paddingLeft: "0",
+            paddingRight: "0",
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
-          {product.description}
-        </p>
-        <div className="d-flex justify-content-between">
-          <div className="rating">
-            <span className="rating-stars">
-              {product.rating.rate}
-              <i class="bi bi-star-fill"></i>
-            </span>
-            <span className="rating-count">
-              ({product.rating.count} reviews)
-            </span>
+          <p
+            style={{
+              textAlign: "justify",
+              margin: "0",
+            }}
+          >
+            {product.description}
+          </p>
+          <div
+            className="d-flex justify-content-between"
+            style={{ marginTop: "10px" }}
+          >
+            <div
+              className="rating"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
+            >
+              <span className="rating-stars">
+                {product.rating.rate}
+                <i class="bi bi-star-fill"></i>
+              </span>
+              <span className="rating-count">
+                ({product.rating.count} reviews)
+              </span>
+            </div>
+            <div
+              className="price"
+              style={{ fontWeight: "bold", fontSize: "20px" }}
+            >
+              ${product.price}
+            </div>
           </div>
-          <div className="price">${product.price}</div>
         </div>
       </div>
     </div>

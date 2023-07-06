@@ -23,13 +23,6 @@ const NavbarComponent = () => {
         <Navbar.Brand href="/">OnlineStore</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          {/* <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <Nav.Link href="/">Home</Nav.Link>
-          </Nav> */}
           <Form className="d-flex ms-auto" onSubmit={handleSubmit}>
             <Form.Control
               type="search"
